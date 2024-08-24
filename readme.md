@@ -1,0 +1,1 @@
+Project from ["the internet"](https://hopp3r.wordpress.com/2012/12/03/officially-open-sourced/), with mouselook added and converted to modern typescript and vite as a learning exercise and to understand the logic.
