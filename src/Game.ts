@@ -276,6 +276,6 @@ export class Game {
     this.gSun.update(this.gShip);
     this.gCamera.update(this.gShipOrientation, this.gShipOrientation.yaw);
     // this.gStats.update();
-    this.scene.simulate(undefined, 1);
+    this.scene.simulate();
   }
 }
