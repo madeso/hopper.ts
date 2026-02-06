@@ -1,5 +1,6 @@
 import { BoxMesh, BoxGeometry, createMaterial } from "./Physics";
 import * as THREE from "three";
+import { ShipOrientation } from "./ShipOrientation";
 
 const TORQUE_POWER = 4.0;
 const TORQUE_THRESHOLD = (5.0 * Math.PI) / 180.0;
@@ -7,7 +8,6 @@ const THRUST_POWER = 50.0;
 const THRUST_FORCE = new THREE.Vector3(0, THRUST_POWER, 0);
 
 export class Ship extends BoxMesh {
-  mainThruster: THREE.ArrowHelper;
 
   constructor(shipGeom: THREE.BufferGeometry) {
     const _material = createMaterial(
@@ -18,11 +18,6 @@ export class Ship extends BoxMesh {
 
     super(shipGeom, BoxGeometry.fromThree(shipGeom), _material, 1);
 
-    this.mainThruster = new THREE.ArrowHelper(
-      this.up /* dir */,
-      this.position /* origin */,
-      1 /* length  */
-    );
 
     this.castShadow = true;
     this.receiveShadow = false;
@@ -51,7 +46,7 @@ export class Ship extends BoxMesh {
     this.setAngularVelocity(new THREE.Vector3(0, 0, 0));
   }
 
-  update(ship_orientation: { orientation_matrix(): THREE.Matrix4 }) {
+  update(ship_orientation: ShipOrientation) {
     let aimO = ship_orientation.orientation_matrix();
     let curO = new THREE.Matrix4().extractRotation(this.matrix);
 
@@ -83,7 +78,5 @@ export class Ship extends BoxMesh {
   }
 
   update_thrusters() {
-    this.mainThruster.setDirection(this.up);
-    this.mainThruster.position.copy(this.position);
   }
 }

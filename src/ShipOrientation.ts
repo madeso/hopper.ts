@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { Ship } from "./Ship";
 
 const ROTATION_FACTOR = 1;
 
@@ -42,7 +43,7 @@ export class ShipOrientation extends THREE.Mesh {
     this.roll = 0;
   };
 
-  update = (ship: { position: THREE.Vector3 }) => {
+  update = (ship: Ship) => {
     this.position.copy(ship.position);
     this.rotation.set(this.pitch, this.yaw, this.roll);
     this.updateMatrix();
